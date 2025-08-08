@@ -1,4 +1,4 @@
 <div>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
+    <a href="{{route('register.index')}}">Register</a>
+    <a href="{{route('login.index')}}">Login</a>
 </div>

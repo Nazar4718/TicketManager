@@ -18,15 +18,19 @@ public function getComments($ticket_id){
         ->with('user')
         ->get();
 }
-    public function getAllMyComments($ticket_id){
-        return $this->model
-            ->where('user_id', auth()->id())->where('ticket_id', $ticket_id)->with('user')->get();
-}
-public function getNotMineComments($ticket_id){
+
+
+public function create($request, $id){
+    $data = $request->validated();
     return $this->model
-        ->where('user_id','!=', auth()->id())->where('ticket_id', $ticket_id)->with('user')->get();
+        ->create([
+            'ticket_id' => $id,
+            'user_id' => auth()->id(),
+            'message' => $data['message'],
+        ]);
 }
 }
+
 
 
 

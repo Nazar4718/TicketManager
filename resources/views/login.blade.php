@@ -37,7 +37,7 @@
 
         <p class="mt-6 text-sm text-center text-gray-600">
             Не маєте акаунту?
-            <a href="{{ route('register') }}" class="text-blue-600 hover:underline">Зареєструватися</a>
+            <a href="{{ route('register.index') }}" class="text-blue-600 hover:underline">Зареєструватися</a>
         </p>
 
     </div>

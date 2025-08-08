@@ -7,9 +7,9 @@
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans">
     <h1>Sorted by priority</h1>
-    <a href="{{route('admin.high')}}">High</a>
-    <a href="{{route('admin.medium')}}">Medium</a>
-    <a href="{{route('admin.low')}}">Low</a>
+    <a href="{{route('admin.show', ['priority' => 'high'])}}">High</a>
+    <a href="{{route('admin.show', ['priority' => 'medium'])}}">Medium</a>
+    <a href="{{route('admin.show', ['priority' => 'low'])}}">Low</a>
 <div class="container mx-auto py-10 px-4 max-w-3xl">
     <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Створити заявку</h1>
 

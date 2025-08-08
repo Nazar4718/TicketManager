@@ -25,8 +25,6 @@ Route::middleware('auth')->group(function(){
    Route::post('/comment/{ticket_id}', [CommentController::class, 'store'])->name('comment.store');
    Route::get('/main{ticket_id}', [MainController::class, 'show'])->name('comment.show');
    Route::delete('/ticket/{ticket_id}', [AdminController::class, 'destroy'])->name('admin.destroy');
-   Route::get('/main/low', [AdminController::class, 'low'])->name('admin.low');
-   Route::get('/main/medium', [AdminController::class, 'medium'])->name('admin.medium');
-   Route::get('/main/high', [AdminController::class, 'high'])->name('admin.high');
+   Route::get('/main/{priority}', [AdminController::class, 'show'])->name('admin.show');
 
 });

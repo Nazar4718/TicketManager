@@ -6,11 +6,13 @@ use App\Http\Requests\TicketRequest;
 use App\Models\Ticket;
 use App\Repositories\TicketRepository;
 use App\Services\CommentsService;
+use App\Services\TicketService;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function __construct(public TicketRepository $ticketRepository, public CommentsService $commentsService)
+
+    public function __construct(public TicketRepository $ticketRepository, public CommentsService $commentsService, public TicketService $ticketService)
     {
     }
 
@@ -24,24 +26,15 @@ class MainController extends Controller
     }
 
     public function store(TicketRequest $request){
-        $data = $request->validated();
-
-        Ticket::create([
-            'user_id' => auth()->id(),
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'status' => 'open',
-            'priority' => $data['priority'],
-        ]);
+        $this->ticketService->create($request);
         return redirect()->route('main.index');
     }
 
     public function show($id){
         $ticket = $this->ticketRepository->getTicketById($id);
-        $myComment = $this->commentsService->getAllMyComments($id);
-        $itsNotMyComments = $this->commentsService->getNotMineComments($id);
+        $comments = $this->commentsService->getComments($id);
 
-        return view('show', ['ticket' => $ticket, 'comments' => $myComment, 'itsNotMyComments' => $itsNotMyComments]);
+        return view('show', ['ticket' => $ticket, 'comments' => $comments]);
     }
 
 }

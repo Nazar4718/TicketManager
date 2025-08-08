@@ -28,13 +28,14 @@ class TicketRepository
             ->where('id', $id)->first();
     }
 
-    public function getLowTickets(){
-        return $this->model->where('priority', 'low')->with('user')->get();
+    public function getTicketsByPriority(string $priority){
+        return $this->model
+            ->where('priority', $priority)
+            ->with('user')
+            ->get();
     }
-    public function getMediumTickets(){
-        return $this->model->where('priority', 'medium')->with('user')->get();
-    }
-    public function getHighTickets(){
-        return $this->model->where('priority', 'high')->with('user')->get();
+
+    public function findById($id){
+        return $this->model->findOrFail($id);
     }
 }
