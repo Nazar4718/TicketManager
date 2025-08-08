@@ -28,10 +28,7 @@ class AdminController extends Controller
 
     public function show($priority){
         $tickets = $this->ticketRepository->getTicketsByPriority($priority);
-        $commentsByTicket = [];
-        foreach($tickets as $item){
-            $commentsByTicket[$item->id] = $this->commentsService->getComments($item->id);
-        }
+        $commentsByTicket = $this->ticketService->getCommentsByTicket($this->commentsService, $tickets);
         return view('admin.show', ['tickets' => $tickets,   'commentsByTicket' => $commentsByTicket]);
     }
 }

@@ -18,10 +18,7 @@ class MainController extends Controller
 
     public function index(){
         $ticket = $this->ticketRepository->getOwnTickets();
-        $commentsByTicket = [];
-        foreach($ticket as $item){
-            $commentsByTicket[$item->id] = $this->commentsService->getComments($item->id);
-        }
+        $commentsByTicket = $this->ticketService->getCommentsByTicket($this->commentsService, $ticket);
         return view('main', ['ticket' => $ticket, 'commentsByTicket' => $commentsByTicket]);
     }
 

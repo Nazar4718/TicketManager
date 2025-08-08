@@ -28,4 +28,12 @@ class TicketService
                 'priority' => $data['priority'],
             ]);
     }
+
+    public function getCommentsByTicket(CommentsService $commentsService, $tickets){
+        $commentsByTicket = [];
+        foreach($tickets as $item){
+            $commentsByTicket[$item->id] = $commentsService->getComments($item->id);
+        }
+        return $commentsByTicket;
+    }
 }
