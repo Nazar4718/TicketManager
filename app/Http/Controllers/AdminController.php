@@ -16,17 +16,20 @@ class AdminController extends Controller
     {
     }
 
-    public function index(){
+    public function index()
+    {
         $ticket = $this->ticketRepository->getAllComments();
         return view('admin', ['ticket' => $ticket]);
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
     $this->ticketService->delete($id);
     return redirect()->back();
     }
 
-    public function show($priority){
+    public function show($priority)
+    {
         $tickets = $this->ticketRepository->getTicketsByPriority($priority);
         $commentsByTicket = $this->ticketService->getCommentsByTicket($this->commentsService, $tickets);
         return view('admin.show', ['tickets' => $tickets,   'commentsByTicket' => $commentsByTicket]);

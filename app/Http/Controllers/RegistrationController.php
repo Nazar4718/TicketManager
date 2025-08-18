@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\Hash;
 class RegistrationController extends Controller
 {
 
-    public function __construct(public UserService $userService){
-
+    public function __construct(public UserService $userService)
+    {
     }
-    public function index(){
+    public function index()
+    {
         return view('registration');
     }
-    public function store(RegistrationRequest $request){
+    public function store(RegistrationRequest $request)
+    {
         $this->userService->create($request);
         return redirect()->route('login.index');
     }

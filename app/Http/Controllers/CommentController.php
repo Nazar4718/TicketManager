@@ -11,14 +11,16 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function __construct(public CommentsService $commentsService, public TicketRepository $ticketRepository){
-
+    public function __construct(public CommentsService $commentsService, public TicketRepository $ticketRepository)
+    {
     }
-    public function index($id){
+    public function index($id)
+    {
         $ticket = $this->ticketRepository->findById($id);
         return view('comment', ['ticket' => $ticket]);
     }
-    public function store(CommentRequest $request, $id){
+    public function store(CommentRequest $request, $id)
+    {
         $this->commentsService->create($request, $id);
         return redirect()->route('main.index');
     }

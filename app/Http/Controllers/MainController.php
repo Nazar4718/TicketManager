@@ -30,7 +30,6 @@ class MainController extends Controller
     public function show($id){
         $ticket = $this->ticketRepository->getTicketById($id);
         $comments = $this->commentsService->getComments($id);
-
         return view('show', ['ticket' => $ticket, 'comments' => $comments]);
     }
 

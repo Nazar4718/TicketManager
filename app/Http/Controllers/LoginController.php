@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('login');
     }
 
-    public function store(LoginRequest $request){
+    public function store(LoginRequest $request)
+    {
         $data = $request->validated();
 
         if(Auth::attempt($data)){

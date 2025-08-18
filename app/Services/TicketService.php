@@ -12,12 +12,14 @@ class TicketService
     {
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         return $this->model
             ->where('id', $id)
             ->delete();
     }
-    public function create($request){
+    public function create($request)
+    {
         $data = $request->validated();
         return $this->model
             ->create([
@@ -29,9 +31,10 @@ class TicketService
             ]);
     }
 
-    public function getCommentsByTicket(CommentsService $commentsService, $tickets){
+    public function getCommentsByTicket(CommentsService $commentsService, $tickets)
+    {
         $commentsByTicket = [];
-        foreach($tickets as $item){
+        foreach ($tickets as $item){
             $commentsByTicket[$item->id] = $commentsService->getComments($item->id);
         }
         return $commentsByTicket;
