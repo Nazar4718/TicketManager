@@ -3,24 +3,37 @@
 namespace App\Services;
 
 use App\Models\Ticket;
+use GuzzleHttp\Promise\Create;
+use Illuminate\Database\Eloquent\Collection;
 
 class TicketService
 {
-    public function __construct(
+    public function __construct
+    (
         public Ticket $model
-    )
-    {
+    ) {
     }
-
-    public function delete($id)
+    /**
+     * @param int $id ID of tickets
+     *
+     * @return Collection
+     */
+    public function delete(int $id)
     {
         return $this->model
             ->where('id', $id)
             ->delete();
     }
-    public function create($request)
+
+    /**
+     * @param array $request Data from form
+     *
+     * @return Create
+     * */
+    public function create(array $request)
     {
         $data = $request->validated();
+
         return $this->model
             ->create([
                 'user_id' => auth()->id(),
@@ -31,12 +44,5 @@ class TicketService
             ]);
     }
 
-    public function getCommentsByTicket(CommentsService $commentsService, $tickets)
-    {
-        $commentsByTicket = [];
-        foreach ($tickets as $item){
-            $commentsByTicket[$item->id] = $commentsService->getComments($item->id);
-        }
-        return $commentsByTicket;
-    }
+
 }
